@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+  <title>Dashboard Template for Bootstrap</title>
+  <!-- Bootstrap core CSS -->
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="fixed-top">
+     <div class="">
+       <div class="fixed-top-title">
+         <a style="color: #fff;" href="/">回 到 首 页</a>
+       </div>
+       <div id="" class="fixed-top-search">
+         <form class="">
+           <input type="text" class="fixed-top-search-input"  placeholder="输入查找信息">
+         </form>
+       </div>
+       <div class="fixed-top-others-div">
+           <a class="fixed-top-others-a" href="#">帮 助</a>
+           <a class="fixed-top-others-a" href="#">反 馈</a>
+           <a class="fixed-top-others-a" href="#">登 录</a>
+       </div>
+     </div>
+   </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header" style="margin-left: 10%;color: #777">修 改 学 生 信 息</h2>
+        <form action="/new" method="post" style="margin-left: 10%;">
+          <!-- 
+            用来放一些不希望被用户看见，但是需要被提交到服务端的数据
+           -->
+           <div class="form-group" >
+            <label for="">学号:</label>
+            <input type="text" class="form-control" id="" name="id" required minlength="6" maxlength="11" value="{{stu.id}}">
+          </div>
+          <div class="form-group" >
+            <label for="">姓名:</label>
+            <input type="text" class="form-control" id="" name="name" required minlength="2" maxlength="10" value="{{stu.name}}">
+          </div>
+          <div class="form-group">
+            <label for="">性别:</label>
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="" value="0" checked> 男&nbsp;&nbsp;
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="" value="1"> 女
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">年龄:</label>
+            <input class="form-control"  type="number" id="" name="age" required min="6" max="40" value="{{stu.age}}">
+          </div>
+          <div class="form-group">
+            <label for="">学分绩点:</label>
+            <input class="form-control"  type="number" id="" name="grade" required min="0" max="4.0" step="0.1" value="{{stu.grade}}">
+          </div>
+          <button type="submit" class="btn btn-success">提 交</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

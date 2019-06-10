@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <title>Dashboard Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="/public/css/main.css" rel="stylesheet">
+      </head>
+
+  <body>
+
+    <nav class="fixed-top">
+      <div class="">
+        <div class="fixed-top-title">
+          <a style="color: #fff;" href="#">学 生 管 理 系 统</a>
+        </div>
+        <div id="" class="fixed-top-search">
+          <form class="">
+            <input type="text" class="fixed-top-search-input"  placeholder="输入查找信息">
+          </form>
+        </div>
+        <div class="fixed-top-others-div">
+            <a class="fixed-top-others-a" href="#">帮 助</a>
+            <a class="fixed-top-others-a" href="#">反 馈</a>
+            <a class="fixed-top-others-a" href="#">登 录</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+    
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <h2 class="sub-header" style="margin-left: 10%;color: #777">学 生 信 息</h2>
+          <div class="table-responsive" style="margin-left: 10%">
+            <a class="btn btn-success" href="/edit">添加学生</a>
+            <table class="table table-striped">
+              <thead>
+                <tr style="text-align: center">
+                  <th>学 号</th>
+                  <th>姓 名</th>
+                  <th>性 别</th>
+                  <th>年 龄</th>
+                  <th>学 分 绩 点</th>
+                  <th>其 他 操 作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{ each students}}
+                <tr style="text-align: center">
+                  <td>{{ $value.id }}</td>
+                  <td>{{ $value.name }}</td>
+                  <td>{{ $value.gender }}</td>
+                  <td>{{ $value.age }}</td>
+                  <td>{{ $value.grade }}</td>
+                  <td><a href="/new?id={{ $value.id }}">修改</a>&nbsp;&nbsp;&nbsp;<a href="/delete?id={{ $value.id }}">删除</a></td>
+                </tr>
+                {{ /each }}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
+  </body>
+</html>
