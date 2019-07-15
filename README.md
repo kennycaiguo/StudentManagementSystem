@@ -1,6 +1,6 @@
-# StudentSystem
+# studentCommunityForum
 介绍
-基于NodeJs的Express框架设计的学生信息管理系统，实现了增加、删除、修改、查找的功能。
+基于NodeJs的Express框架设计的学生社区论坛，实现了显示所有账号状态、注册登陆账号、修改密码、修改个人信息、留言板和添加留言等功能。主要用于NodeJS和MongDB的学习。
 
 涉及插件
 - NodeJs的核心插件：
@@ -18,5 +18,12 @@
 - 两种数据渲染模式
 1. 静态数据渲染：通过fs.readFile、fs.writeFile来执行读写静态文件的JSON数据，用于渲染页面（需要撰写API处理增删改查等操作）
 2. 数据库注入渲染：通过Mongdb数据库进行数据渲染。
-使用说明
+## 使用说明
 - 使用Mongdb数据库渲染，得先开启数据库，再启动服务器。
+```
+cmd输入:
+1. mongod
+2. mongo
+git bash输入:
+node app.js
+```
