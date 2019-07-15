@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>注册页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- header的CSS-->
+    <link href="/public/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/public/css/signin.css" rel="stylesheet">
+
+  </head>
+
+<body>
+  <header>
+    {{ include './header.html' }}
+  </header>
+  <div class="container">
+    <form class="form-signin" id="registerForm" action="/regist" method="post">
+      <h3 class="form-signin-heading"> 注 册 </h3>
+        <label for="input" class="sr-only">昵 称</label>
+        <input type="text" id="inputNickname" class="form-control" name="nickname" placeholder="昵称：" required autofocus required minlength="1" maxlength="12">
+        <label for="input" class="sr-only">学 号</label>
+        <input type="number" id="inputStudentId" class="form-control" name="studentId" placeholder="学号：" required minlength="6" maxlength="12">
+        <label for="inputPassword" class="sr-only">密 码</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="密码：" required minlength="6" maxlength="12">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+      <a class="btn btn-lg btn-primary btn-block"  style="height: 30px;line-height: 10px;font-size: 18px;background-color: #333;" href="/login">已有账号？返回登录页面</a>
+    </form>
+  </div> <!-- /container -->
+  <!--处理注册信息-->
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    $(function(){
+      $('#registerForm').on('submit',function (e) {
+        e.preventDefault()
+        var formData = $(this).serialize()
+        $.ajax({
+          url: '/regist',
+          type: 'post',
+          data: formData,
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+            var err_code = data.err_code
+            if (err_code === 0) {
+              window.alert('注册成功',
+              setTimeout(() => {
+                window.location.href = '/login'
+              }, 2000))
+            } else if (err_code === 1) {
+              window.alert('账号已被注册')
+            }
+          }
+        })
+      })
+    })
+  </script>
+</body>
+</html>

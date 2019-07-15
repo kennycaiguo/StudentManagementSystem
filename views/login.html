@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>登录页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- header的CSS-->
+    <link href="/public/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/public/css/signin.css" rel="stylesheet">
+
+  </head>
+
+<body>
+  <!--通用头部-->
+  <header>
+    {{ include './header.html' }}
+  </header>
+  <div class="container">
+    <!--登陆表单-->
+    <form class="form-signin" action="/login" method="post" id="loginForm">
+      <!--登陆-->
+      <h3 class="form-signin-heading"> 登 录</h3>
+      <!--账号输入（缺陷:没用正则式验证学号是否输入正确）-->
+      <label for="input" class="sr-only">学 号</label>
+      <input type="number" id="inputStudentId" class="form-control" name="studentId" placeholder="学号：" required>
+      <!--密码输入-->
+      <label for="inputPassword" class="sr-only">密 码</label>
+      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="密码：" required>
+      <!--其他操作（记住密码没去实现）-->
+      <div class="checkbox">
+        <label for="remember-me">
+          <input type="checkbox" id="remember-me" value="remember-me"> 记住密码
+        </label>
+        <a style="margin-left: 90px;" href="/modify">修改密码</a>
+        <a style="margin-left: 10px;" href="/regist">注册</a>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+  </div> <!-- /container -->
+  <!--处理登录状态码-->
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    $(function(){
+      $('#loginForm').on('submit',function (e) {
+        e.preventDefault()
+        var formData = $(this).serialize()
+        $.ajax({
+          url: '/login',
+          type: 'post',
+          data: formData,
+          dataType: 'json',
+          success: function (data) {
+            console.log(data)
+            var err_code = data.err_code
+            if (err_code === 0) {
+              window.alert('登录成功',
+              setTimeout(() => {
+              window.location.href = '/'
+              },2000))
+            } else if (err_code === 1) {
+              window.alert('密码错误，请重新输入')
+            } else if (err_code == 404) {
+              window.alert('账号不存在')
+            } else if (err_code == 500) {
+              window.alert('服务器有误，刷新页面重试')
+            }
+          }
+        })
+      })
+    })
+  </script>
+</body>
+</html>

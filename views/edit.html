@@ -6,10 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  <meta name="description" content="">
-  <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
-  <title>Dashboard Template for Bootstrap</title>
+  <title>添加留言</title>
   <!-- Bootstrap core CSS -->
   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
@@ -17,64 +15,46 @@
 </head>
 
 <body>
-  <nav class="fixed-top">
-     <div class="">
-       <div class="fixed-top-title">
-         <a style="color: #fff;" href="/">回 到 首 页</a>
-       </div>
-       <div id="" class="fixed-top-search">
-         <form class="">
-           <input type="text" class="fixed-top-search-input"  placeholder="输入查找信息">
-         </form>
-       </div>
-       <div class="fixed-top-others-div">
-           <a class="fixed-top-others-a" href="#">帮 助</a>
-           <a class="fixed-top-others-a" href="#">反 馈</a>
-           <a class="fixed-top-others-a" href="#">登 录</a>
-       </div>
-     </div>
-   </nav>
-
+  <!--引用头部-->
+  <header>
+      {{ include './header.html' }}
+  </header>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h2 class="sub-header" style="margin-left: 10%;color: #777">添 加 学 生</h2>
-        <form action="/edit" method="post" style="margin-left: 10%;">
-          <!-- 
-            用来放一些不希望被用户看见，但是需要被提交到服务端的数据
-           -->
-          <div class="form-group" >
-              <label for="">学号:</label>
-              <input type="text" class="form-control" id="" name="studentId" required minlength="6" maxlength="11" >
-            </div>
-          <div class="form-group" >
-            <label for="">姓名:</label>
-            <input type="text" class="form-control" id="" name="name" required minlength="2" maxlength="10" >
+        <!--添加留言-->
+        <h2 class="sub-header">添 加 留 言</h2>
+        <!--留言表单（包括用户名、性别和留言内容）-->
+        <form action="/edit" method="post" class="move-left">
+          <!--用户名-->
+          <div class="form-group h6" >
+            <label>用户名选择:</label></br>
+              <input type="radio" id="nickname" name="nickname" value="{{user[0].nickname}}" />
+              <label for="nickname" class="text-secondary">{{user[0].nickname}}</label>
+              </br>
+              <input type="radio" id="secret-name" name="nickname" value="匿名" />
+              <label for="secret-name" class="text-secondary">匿名</label>
           </div>
+          <!--性别-->
           <div class="form-group">
-            <label for="">性别:</label>
-            <div>
-              <label class="radio-inline">
-                <input type="radio" name="gender" id="" value="0" checked> 男&nbsp;&nbsp;
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="gender" id="" value="1"> 女
-              </label>
-            </div>
+            <label>性别选择:</label></br>
+              <input type="radio" id="default-gender" name="gender" value="{{user[0].gender}}" />
+              <label for="default-gender" class="text-secondary">默认性别</label>
+              </br>
+              <input type="radio" id="secret-gender" name="gender" value="-1" />
+              <label for="secret-gender" class="text-secondary">保密</label>
           </div>
-          <div class="form-group">
-            <label for="">年龄:</label>
-            <input class="form-control"  type="number" id="" name="age" required min="6" max="40">
-          </div>
-          <div class="form-group">
-            <label for="">学分绩点:</label>
-            <input class="form-control"  type="number" id="" name="grade" required min="0" max="4.0" step="0.1" >
+          <!--留言内容-->
+          <div class="form-group h6" >
+              <label for="comment">留言内容:</label>
+              <textarea class="myTextarea" name="comment">
+              </textarea>
           </div>
           <button type="submit" class="btn btn-success">提 交</button>
+          <a href="/feedback" class="btn btn-success">返回留言板</a>
         </form>
       </div>
     </div>
   </div>
 </body>
-
 </html>

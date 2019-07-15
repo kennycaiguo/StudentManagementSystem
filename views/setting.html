@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+  <title>修改信息</title>
+  <!-- Bootstrap core CSS -->
+  <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/public/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  {{ include './header.html'}}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">修 改 个 人 信 息</h2>
+        <!--个人信息表单-->
+        <form action="/setting?id={{stu.studentId}}" method="post" class="move-left">
+          <!--姓名-->
+          <div class="form-group" >
+            <label for="nickname">姓名:</label>
+            <input type="text" class="form-control" id="nickname" name="nickname" required minlength="2" maxlength="10" value="{{stu.nickname}}">
+          </div>
+          <!--性别-->
+          <div class="form-group">
+            <label for="gender">性别:</label>
+            <div>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="secret" value="-1" checked>保密
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="man" value="0"> 男
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="gender" id="female" value="1"> 女
+              </label>
+            </div>
+          </div>
+          <!--年龄-->
+          <div class="form-group">
+            <label for="age">年龄:</label>
+            <input class="form-control"  type="number" id="age" name="age" required min="6" max="40" value="{{stu.age}}">
+          </div>
+          <div class="form-group">
+            <label for="status">账号状态:</label>
+            <input class="form-control"  type="number" id="status" name="status" required min="-1" max="1" value="{{stu.status}}">
+          </div>
+          <div class="form-group">
+            <span>注销账号：</span>
+            <a class="btn alert-danger" href="/delete?id={{ user[0].studentId }}">注销当前账号</a>
+          </div>
+          <!--此处未能实现头像替换功能-->
+          <div>
+          当前头像:
+            <img class="imgPreview" src="{{stu.avatar}}" />
+          上传新头像：
+            <input type="file" id="file" name="avatar" value="/public/img/avatar-default.png" accept="image/jpg,image/jpeg,image/png,image/PNG">
+          </div>
+          <button type="submit" class="btn btn-success">提 交</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

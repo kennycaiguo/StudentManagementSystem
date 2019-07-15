@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>留言反馈</title>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/css/main.css" rel="stylesheet">
+    <link rel="icon" href="../../favicon.ico">
+</head>
+<body>
+  <!--引用头部-->
+  <header>
+    {{ include './header.html' }}
+  </header>
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <!--留言板-->
+          <h2 class="sub-header">反 馈 信 息</h2>
+          <div class="table-responsive move-left">
+            <!--添加留言按钮-->
+            <a class="btn btn-success" href="/edit">添加留言</a>
+            <!--显示留言内容-->
+            <table class="table table-striped">
+              <thead>
+                <tr style="text-align: center">
+                  <th>留 言 内 容</th>
+                  <th>用 户</th>
+                  <th>性 别</th>
+                  <th>评 论 时 间</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{ each comments }}
+                <tr style="text-align: center">
+                  <td>
+                    {{ $value.comment }}
+                  </td>
+                  <td>
+                      {{ $value.nickname }}
+                    </td>
+                    {{if $value.gender == -1}}
+                    <td>
+                      保密
+                    </td>
+                    {{else if $value.gender == 0}}
+                    <td>
+                      男
+                    </td>
+                    {{else if $value.gender == 1}}
+                    <td>
+                      女
+                    </td>
+                    {{/if}}
+                  <td class="create_time">
+                    {{ $value.create_time }}
+                  </td>
+                </tr>
+                {{ /each }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+      //处理显示日期
+      var createTime = document.getElementsByClassName('create_time')
+      for (let i=0;i<createTime.length;i++) {
+        createTime[i].innerHTML = createTime[i].innerHTML.split("T")[0] + " , " + createTime[i].innerHTML.split("T")[1].split(".")[0] + "\""
+      }
+  </script>
+</body>
+</html>
