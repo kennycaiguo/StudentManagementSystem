@@ -1,32 +1,30 @@
 <!--通用头部-->
-  <nav class="fixed-top">
-    <div>
-      <div class="fixed-top-title">
-        <a style="color: #fff;" href="/">学 生 社 区 论 坛</a>
-      </div>
-      <div class="fixed-top-search">
+<header class="fixed-top">
+    <div class="fixed-top-search">
         <form>
           <input type="text" class="fixed-top-search-input"  placeholder="输入查找信息">
         </form>
+    </div>
+    <div class="fixed-top-title">
+      <a style="color: white" href="/">学 生 社 区 论 坛</a>
+    </div>
+  <!--如果用户登录了，会显示用户信息-->
+  {{ if user}}
+  <div class="fixed-top-others-div">
+      用户：
+      <div class="fixed-top-user-avatar">
+          <img class="fixed-top-user-avatar-image" src="{{ user[0].avatar }}" />
       </div>
-    <!--如果用户登录了，会显示用户信息-->
-    {{ if user}}
-    <div class="fixed-top-others-div">
-        用户：
-        <div class="fixed-top-user-avatar">
-            <img class="fixed-top-user-avatar-image" src="{{ user[0].avatar }}" />
-        </div>
-        <span class="fixed-top-others-nickname" href="#">{{ user[0].nickname }}</span>
-        <a class="fixed-top-others-a" href="/setting?id={{ user[0].studentId }}">设 置</a>
-        <a class="fixed-top-others-a" href="/logout">退 出</a>
-    </div>
-    {{ else }}
-    <!--未登录时显示-->
-    <div class="fixed-top-others-div">
-          <a class="fixed-top-others-a" href="/login" onclick="alert('请先登录')">留言反馈</a>
-          <a class="fixed-top-others-a" href="/login">登 录</a>
-          <a class="fixed-top-others-a" href="/regist">注 册</a>
-    </div>
-    {{ /if }}
-    </div>
-  </nav>
+      <span class="fixed-top-others-nickname" href="#">{{ user[0].nickname }}</span>
+      <a class="fixed-top-others-a" href="/setting?id={{ user[0].studentId }}">设 置</a>
+      <a class="fixed-top-others-a" href="/logout">退 出</a>
+  </div>
+  {{ else }}
+  <!--未登录时显示-->
+  <div class="fixed-top-others-div">
+        <a class="fixed-top-others-a" href="/login" onclick="alert('请先登录')">留言反馈</a>
+        <a class="fixed-top-others-a" href="/login">登 录</a>
+        <a class="fixed-top-others-a" href="/regist">注 册</a>
+  </div>
+  {{ /if }}
+</header>
