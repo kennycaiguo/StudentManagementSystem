@@ -1,4 +1,4 @@
-# studentCommunityForum
+# Student information management system
 介绍
 基于NodeJs的Express框架设计的学生社区论坛，实现了显示所有账号状态、注册登陆账号、修改密码、修改个人信息、留言板和添加留言等功能。主要用于NodeJS和MongDB的学习。
 
